@@ -40,7 +40,7 @@ a {
 }
 
 #game-text:hover {  
-    color: blue;
+    text-decoration: underline;
 }
 
 
