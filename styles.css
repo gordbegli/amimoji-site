@@ -43,6 +43,23 @@ a {
     text-decoration: underline;
 }
 
+#bio {
+    font-family: sans-serif;
+    color: black;
+    font-size: 1.5em;
+    background-color: white;
+    border-radius: 10px;
+}
+
+#bio-small {
+    font-family: sans-serif;
+    color: black;
+    font-size: 0.5em;
+    background-color: white;
+    border-radius: 10px;
+    width: fit-content;
+}
+
 
 /* if on mobile */
 @media screen and (max-width: 600px) {
@@ -54,6 +71,6 @@ a {
 
 /* set the background of the page to background.png tiled*/
 body {
-    background-image: url("background.png");
+    background-image: url("background2.png");
     background-repeat: repeat;
 }
