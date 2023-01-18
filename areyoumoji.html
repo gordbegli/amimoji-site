@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Are You Moji</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <video id="webcam"></video>
+  <canvas id="canvas"></canvas>
+  <br>
+  <button id="snap">Take Picture</button>
+  <a href="" download="webcam-photo.png" id="download">Download Image</a>
+  <script>
+    // Get elements
+    var video = document.querySelector("#webcam");
+    var canvas = document.querySelector("#canvas");
+    var snap = document.querySelector("#snap");
+    var download = document.querySelector("#download");
+    var ctx = canvas.getContext("2d");
+
+    // Get webcam stream
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(function(stream) {
+        video.srcObject = stream;
+        video.onloadedmetadata = function(e) {
+          video.play();
+        };
+      })
+      .catch(function(err) {
+        console.log("The following error occurred: " + err.name);
+      });
+
+    // Take picture when button is clicked
+    snap.addEventListener("click", function() {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      ctx.drawImage(video, 0, 0);
+      let dataURL = canvas.toDataURL();
+      download.href = dataURL;
+      download.style.display = "block";
+      fetch("https://ggordbegli-fastai2space.hf.space/run/predict", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          data: [dataURL]
+        })
+      })
+        .then(r => r.json())
+        .then(
+          r => {
+            let data = r.data;
+            // You can use the data received from the API here
+            console.log(data);
+            if(data[0].label == "Dog"){
+                alert(`The AI guessed you're NOT Moji. ${data[0].confidences[0].confidence.toFixed(2) * 100}% confidence`)
+                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                    location.reload();
+                }
+            } else {
+                alert(`The AI guessed you ARE Moji. ${data[0].confidences[0].confidence.toFixed(2) * 100}% confidence`)
+                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                    location.reload();
+                }
+            }
+          }
+        )
+        .catch(error => {
+          console.log(error);
+        });
+    });
+  </script>
+</body>
+</html>
