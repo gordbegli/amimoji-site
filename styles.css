@@ -1,0 +1,9 @@
+#snap {
+    width: 100%;
+    height: 3em;
+    font-size: 3em;
+}
+#download {
+    display: none;
+    color: white;
+}
