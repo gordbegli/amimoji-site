@@ -53,8 +53,15 @@
             console.log(data);
             if(data[0].label == "Dog"){
                 alert("The AI guessed you're NOT Moji")
+                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                    location.reload();
+                }
             } else {
                 alert("The AI guessed you're Moji")
+                location.reload();
+                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                    location.reload();
+                }
             }
           }
         )

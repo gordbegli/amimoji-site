@@ -7,3 +7,11 @@
     display: none;
     color: white;
 }
+
+/* if on mobile */
+@media screen and (max-width: 600px) {
+    /* make the webcam view invisible */
+    #webcam {
+        display: none;
+    }
+}
