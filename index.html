@@ -52,12 +52,12 @@
             // You can use the data received from the API here
             console.log(data);
             if(data[0].label == "Dog"){
-                alert("The AI guessed you're NOT Moji")
+                alert(`The AI guessed you're NOT Moji. ${data[0].confidences[0].confidence.toFixed(2) * 100}% confidence`)
                 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
                     location.reload();
                 }
             } else {
-                alert("The AI guessed you're Moji")
+                alert(`The AI guessed you ARE Moji. ${data[0].confidences[0].confidence.toFixed(2) * 100}% confidence`)
                 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
                     location.reload();
                 }
